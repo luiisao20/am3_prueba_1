@@ -71,7 +71,6 @@ Widget form(BuildContext context) {
             ),
             Expanded(
               child: TextField(
-                enabled: tip.text == 'si',
                 controller: tipValue,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
                 decoration: InputDecoration(
@@ -106,6 +105,16 @@ void calculate(
   String tipValue,
   BuildContext context,
 ) {
+  if (total.trim().isEmpty || people.trim().isEmpty || tip.trim().isEmpty) {
+    showDialog(
+      context: context,
+      builder: ((context) => AlertDialog(
+        title: Text('Error'),
+        content: Text('Existen datos vacios'),
+      )),
+    );
+    return;
+  }
   try {
     double totalValue;
     if (tip == 'si') {
